@@ -22,4 +22,34 @@ class CreateTransactionAPIView(generics.CreateAPIView):
         serializer.save(user=self.request.user)
 
 
+class UpdateTransactionAPIView(generics.UpdateAPIView):
+    queryset = Transaction.objects.all()
+    serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user)
+
+
+class UserTransactionsAPIView(generics.ListAPIView):
+    serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user)
+
+
+class UserTransactionDetailAPIView(generics.RetrieveAPIView):
+    serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user)
+
+
+class DeleteUserTransactionAPIView(generics.DestroyAPIView):
+    serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user)
