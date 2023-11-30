@@ -3,14 +3,18 @@ from django.shortcuts import render
 # Create your views here.
 
 
-# user transactions crud -
+# user transactions crud + filter
 
-
+from django_filters.rest_framework import DjangoFilterBackend  # Import the correct backend
 from rest_framework import generics
-from .models import Transaction
+
+from .filters import TransactionFilter
+from .models import Transaction, Category
 from .serializers import TransactionSerializer
 from rest_framework.permissions import IsAuthenticated
 
+
+# region Transaction
 
 class CreateTransactionAPIView(generics.CreateAPIView):
     queryset = Transaction.objects.all()
@@ -34,6 +38,8 @@ class UpdateTransactionAPIView(generics.UpdateAPIView):
 class UserTransactionsAPIView(generics.ListAPIView):
     serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
+    filterset_class = TransactionFilter
+    filter_backends = [DjangoFilterBackend]  # Use the correct backend
 
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user)
@@ -53,3 +59,10 @@ class DeleteUserTransactionAPIView(generics.DestroyAPIView):
 
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user)
+
+# endregion
+
+
+# class CategoryListView(generics.ListAPIView):
+#     queryset = Category.objects.all()
+#     serializer_class = CategorySerializer

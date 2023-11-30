@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # external apps
     'rest_framework',
     'drf_spectacular',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [

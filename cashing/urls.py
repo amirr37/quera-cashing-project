@@ -10,6 +10,7 @@ urlpatterns = [
     path('delete-user-transaction/<int:pk>/', DeleteUserTransactionAPIView.as_view(),
          name='delete-user-transaction-api'),
 
+
 ]
 
 
