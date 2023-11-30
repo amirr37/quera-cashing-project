@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'account',
     # external apps
     'rest_framework',
-
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +124,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'account.CustomUser'
 
-
 REST_FRAMEWORK = {
 
     'DEFAULT_PERMISSION_CLASSES': [
@@ -137,4 +136,11 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,  # Set the number of items per page according to your preference
     # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Quera cashing project',
+    'DESCRIPTION': 'developed by Amir jahangiri',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }
