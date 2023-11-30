@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     # internal apps
     'account',
+    'cashing',
     # external apps
     'rest_framework',
     'drf_spectacular',
