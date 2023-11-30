@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Transaction
+from .models import Transaction, Category
 
 
 class TransactionSerializer(serializers.ModelSerializer):
@@ -8,10 +8,8 @@ class TransactionSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-# from .models import Category
-#
-#
-# class CategorySerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Category
-#         fields = '__all__'
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'

@@ -10,7 +10,7 @@ from rest_framework import generics
 
 from .filters import TransactionFilter
 from .models import Transaction, Category
-from .serializers import TransactionSerializer
+from .serializers import TransactionSerializer, CategorySerializer
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -60,9 +60,12 @@ class DeleteUserTransactionAPIView(generics.DestroyAPIView):
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user)
 
+
 # endregion
 
 
-# class CategoryListView(generics.ListAPIView):
-#     queryset = Category.objects.all()
-#     serializer_class = CategorySerializer
+class CategoryListView(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
