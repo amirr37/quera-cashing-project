@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  # Django web application
+  web:
+    image: python:3.8
+    container_name: django_web
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./quera-cashing-project:/app/quera-cashing-project
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=mydatabaseuser
+      - POSTGRES_PASSWORD=mypassword
+
+  # PostgreSQL database
+  db:
+    image: postgres:latest
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=mydatabaseuser
+      - POSTGRES_PASSWORD=mypassword
