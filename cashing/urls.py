@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import CreateTransactionAPIView, UpdateTransactionAPIView, UserTransactionsAPIView, \
-    UserTransactionDetailAPIView, DeleteUserTransactionAPIView, CategoryListView
+    UserTransactionDetailAPIView, DeleteUserTransactionAPIView, CategoryListView, MonthlyReportCreateAPIView
 
 urlpatterns = [
     path('create-transaction/', CreateTransactionAPIView.as_view(), name='create-transaction-api'),
@@ -10,5 +10,7 @@ urlpatterns = [
     path('delete-user-transaction/<int:pk>/', DeleteUserTransactionAPIView.as_view(),
          name='delete-user-transaction-api'),
     path('categories/', CategoryListView.as_view(), name='category-list-api'),
+    path('monthly-reports/', MonthlyReportCreateAPIView.as_view(), name='monthly-report-create'),
 
 ]
+
