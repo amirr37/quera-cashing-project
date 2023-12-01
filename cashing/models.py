@@ -6,8 +6,6 @@ from django.dispatch import receiver
 from account.models import CustomUser
 
 
-
-
 # Create your models here.
 
 
