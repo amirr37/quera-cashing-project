@@ -134,9 +134,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly'
     ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #     'rest_framework.authentication.TokenAuthentication'
-    # ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ],
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,  # Set the number of items per page according to your preference
@@ -152,6 +152,5 @@ SPECTACULAR_SETTINGS = {
 }
 
 import os
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'quera-cashing-project.settings')
 settings.configure()
