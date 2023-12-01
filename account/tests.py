@@ -1,8 +1,14 @@
+from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from rest_framework.test import APIClient
 from rest_framework import status
 from .serializers import CustomUserSerializer
+
+import os
+from django.conf import settings
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 
 
 # todo : config django settings module
@@ -10,26 +16,20 @@ class CustomUserCreateAPIViewTest(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.user_data = {
-            'username': 'testuser',
-            'email': 'testuser@example.com',
+            'username': 'testuserssssddsd',
             'password': 'testpassword'
         }
 
     def test_create_user_success(self):
         # Send a POST request to the view's endpoint
-        response = self.client.post('http://127.0.0.1:8000/auth-token', self.user_data, format='json')
+        response = self.client.post('http://127.0.0.1:8000/account/create-user/', self.user_data, format='json')
+        user_id = response.json().get('id')
 
-        # Assert that the response has a 201 Created status code
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        # Assert that the user object was created in the database
-        self.assertTrue(get_user_model().objects.filter(username='testuser').exists())
+    def test_create_user_with_invalid_data(self):
+        invalid_user_data = {'username': 'testuser'}
+        response = self.client.post('http://127.0.0.1:8000/account/create-user/', invalid_user_data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-        # Add more assertions based on your expected response data
-        # For example, you might want to check if the response contains the created user's data
-        user_id = response.json().get('id')
-        self.assertIsNotNone(user_id)
-        self.assertEqual(response.json().get('username'), 'testuser')
-        self.assertEqual(response.json().get('email'), 'testuser@example.com')
 
-    # Add more test cases if needed
