@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
     'django_filters',
-
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -148,5 +148,3 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
-
-
